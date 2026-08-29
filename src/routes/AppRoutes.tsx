@@ -1,13 +1,21 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { MainLayout } from '../layouts/MainLayout';
 import { Dashboard } from '../pages/Dashboard';
 import { Login } from '../pages/Login';
+import { Products } from '../pages/Products';
+import { Movements } from '../pages/Movements';
 
 export function AppRoutes() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Dashboard />} />
         <Route path="/login" element={<Login />} />
+
+        <Route element={<MainLayout />}>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/movements" element={<Movements />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
