@@ -5,6 +5,7 @@ import { Login } from '../pages/Login';
 import { Products } from '../pages/Products';
 import { Movements } from '../pages/Movements';
 import { ProtectedRoute } from './ProtectedRoute';
+import { LowStock } from '../pages/LowStock';
 
 export function AppRoutes() {
   return (
@@ -17,6 +18,7 @@ export function AppRoutes() {
             <Route path="/" element={<Dashboard />} />
             <Route path="/products" element={<Products />} />
             <Route path="/movements" element={<Movements />} />
+            <Route path="/low-stock" element={<LowStock />} />
           </Route>
         </Route>
       </Routes>
