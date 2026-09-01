@@ -1,7 +1,15 @@
 import { Boxes, LayoutDashboard, LogOut, PackagePlus } from 'lucide-react';
-import { NavLink, Outlet } from 'react-router-dom';
+import { NavLink, Outlet, useNavigate } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 
 export function MainLayout() {
+  const navigate = useNavigate();
+  const { logout } = useAuth();
+
+  function handleLogout() {
+    logout();
+    navigate('/login');
+  }
   return (
     <div className="flex min-h-screen bg-slate-100">
       <aside className="w-64 bg-slate-900 text-white">
@@ -54,7 +62,7 @@ export function MainLayout() {
             Movimentações
           </NavLink>
         </nav>
-        <button className="flex w-full items-center gap-3 px-8 py-4 text-slate-400 hover:text-white">
+        <button onClick={handleLogout} className="flex w-full items-center gap-3 px-8 py-4 text-slate-400 hover:text-white cursor-pointer">
           <LogOut size={20} />
           Sair
         </button>
