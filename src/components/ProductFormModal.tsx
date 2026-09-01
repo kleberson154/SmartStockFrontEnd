@@ -73,7 +73,7 @@ export function ProductFormModal({ product, onClose, onSaved }: ProductFormModal
           <button
             type="button"
             onClick={onClose}
-            className="rounded-lg p-2 text-slate-500 transition hover:bg-slate-100"
+            className="rounded-lg p-2 text-slate-500 transition hover:bg-slate-100 cursor-pointer"
           >
             <X size={20} />
           </button>
