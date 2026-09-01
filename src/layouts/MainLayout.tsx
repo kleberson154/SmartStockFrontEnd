@@ -1,4 +1,4 @@
-import { Boxes, LayoutDashboard, LogOut, PackagePlus } from 'lucide-react';
+import { Boxes, LayoutDashboard, LogOut, PackagePlus, AlertTriangle } from 'lucide-react';
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 
@@ -61,8 +61,25 @@ export function MainLayout() {
             <PackagePlus size={20} />
             Movimentações
           </NavLink>
+
+          <NavLink
+            to="/low-stock"
+            className={({ isActive }) =>
+              `flex items-center gap-3 rounded-lg px-4 py-3 transition ${
+                isActive
+                  ? 'bg-slate-800 text-white'
+                  : 'text-slate-400 hover:bg-slate-800 hover:text-white'
+              }`
+            }
+          >
+            <AlertTriangle size={20} />
+            Estoque Baixo
+          </NavLink>
         </nav>
-        <button onClick={handleLogout} className="flex w-full items-center gap-3 px-8 py-4 text-slate-400 hover:text-white cursor-pointer">
+        <button
+          onClick={handleLogout}
+          className="flex w-full items-center gap-3 px-8 py-4 text-slate-400 hover:text-white cursor-pointer"
+        >
           <LogOut size={20} />
           Sair
         </button>
