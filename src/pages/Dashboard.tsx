@@ -8,7 +8,6 @@ import type { Movement } from '../types/movement';
 import type { Product } from '../types/product';
 
 export function Dashboard() {
-  const [products, setProducts] = useState<Product[]>([]);
   const [lowStockProducts, setLowStockProducts] = useState<Product[]>([]);
   const [movements, setMovements] = useState<Movement[]>([]);
 
@@ -29,8 +28,7 @@ export function Dashboard() {
           getLowStockProducts(),
           getMovements(0, 5),
         ]);
-
-        setProducts(productsData.content);
+        
         setLowStockProducts(lowStockData);
         setMovements(movementsData.content);
 
