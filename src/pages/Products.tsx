@@ -64,9 +64,9 @@ export function Products() {
 
   return (
     <div>
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h2 className="text-3xl font-bold text-slate-900">Produtos</h2>
+          <h2 className="text-2xl font-bold text-slate-900 sm:text-3xl">Produtos</h2>
 
           <p className="mt-2 text-slate-600">Gerencie os produtos cadastrados no estoque.</p>
         </div>
@@ -74,7 +74,7 @@ export function Products() {
         {isAdmin && (
           <button
             onClick={() => setShowCreateModal(true)}
-            className="flex items-center gap-2 rounded-lg bg-slate-900 px-4 py-3 text-sm font-semibold text-white transition hover:bg-slate-800 cursor-pointer"
+            className="flex w-full items-center justify-center gap-2 rounded-lg bg-slate-900 px-4 py-3 text-sm font-semibold text-white transition hover:bg-slate-800 sm:w-auto cursor-pointer"
           >
             <PackagePlus size={18} />
             Novo produto
@@ -191,10 +191,10 @@ export function Products() {
       )}
 
       {!loading && !error && totalPages > 1 && (
-        <div className="mt-6 flex items-center justify-between rounded-xl border border-slate-200 bg-white px-5 py-4">
+        <div className="mt-6 flex flex-col gap-4 rounded-xl border border-slate-200 bg-white px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-5">
           <p className="text-sm text-slate-500">{totalElements} produtos cadastrados</p>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center justify-between gap-2 sm:justify-start sm:gap-3">
             <button
               type="button"
               disabled={page === 0}
