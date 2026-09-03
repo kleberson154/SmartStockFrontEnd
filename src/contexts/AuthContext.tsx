@@ -28,11 +28,19 @@ function getUserFromToken(token: string | null): AuthUser | null {
   try {
     const decoded = jwtDecode<JwtPayload>(token);
 
+    const currentTime = Date.now() / 1000;
+
+    if (decoded.exp <= currentTime) {
+      removeToken();
+      return null;
+    }
+
     return {
       email: decoded.sub,
       role: decoded.role,
     };
   } catch {
+    removeToken();
     return null;
   }
 }
@@ -67,6 +75,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useAuth() {
   const context = useContext(AuthContext);
 
