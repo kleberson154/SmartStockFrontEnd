@@ -2,8 +2,8 @@ import { X } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 import { createMovement } from '../services/movementService';
-import { getProducts } from '../services/productService';
-import type { MovementRequest, MovementType } from '../types/movement';
+import { getAllProducts } from '../services/productService';
+import type { MovementRequest } from '../types/movement';
 import type { Product } from '../types/product';
 
 interface MovementFormModalProps {
@@ -31,7 +31,7 @@ export function MovementFormModal({
   useEffect(() => {
     async function loadProducts() {
       try {
-        const data = await getProducts();
+        const data = await getAllProducts();
         setProducts(data);
       } catch {
         setError('Não foi possível carregar os produtos.');

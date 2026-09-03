@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { ArrowDownToLine, ArrowUpFromLine, Plus } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
@@ -11,14 +12,20 @@ export function Movements() {
   const [error, setError] = useState('');
   const [showCreateModal, setShowCreateModal] = useState(false);
 
+  const [page, setPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
+  const [totalElements, setTotalElements] = useState(0);
+
   async function loadMovements() {
     try {
       setLoading(true);
       setError('');
 
-      const data = await getMovements();
+      const data = await getMovements(page, 10);
 
-      setMovements(data);
+      setMovements(data.content);
+      setTotalPages(data.totalPages);
+      setTotalElements(data.totalElements);
     } catch {
       setError('Não foi possível carregar as movimentações.');
     } finally {
@@ -28,7 +35,7 @@ export function Movements() {
 
   useEffect(() => {
     loadMovements();
-  }, []);
+  }, [page]);
 
   return (
     <div>
@@ -112,6 +119,34 @@ export function Movements() {
                 </div>
               );
             })}
+          </div>
+        </div>
+      )}
+
+      {!loading && !error && totalPages > 1 && (
+        <div className="mt-6 flex items-center justify-between rounded-xl border border-slate-200 bg-white px-5 py-4">
+          <p className="text-sm text-slate-500">{totalElements} movimentações registradas</p>
+
+          <div className="flex items-center gap-3">
+            <button
+              disabled={page === 0}
+              onClick={() => setPage((current) => current - 1)}
+              className="rounded-lg border border-slate-300 px-3 py-2 text-sm disabled:opacity-40 cursor-pointer"
+            >
+              Anterior
+            </button>
+
+            <span className="text-sm text-slate-600">
+              Página {page + 1} de {totalPages}
+            </span>
+
+            <button
+              disabled={page + 1 >= totalPages}
+              onClick={() => setPage((current) => current + 1)}
+              className="rounded-lg border border-slate-300 px-3 py-2 text-sm disabled:opacity-40 cursor-pointer"
+            >
+              Próxima
+            </button>
           </div>
         </div>
       )}
