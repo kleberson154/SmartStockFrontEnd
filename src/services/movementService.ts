@@ -1,12 +1,20 @@
 import { api } from './api';
-
+import type { PageResponse } from '../types/page';
 import type {
   Movement,
   MovementRequest,
 } from '../types/movement';
 
-export async function getMovements(): Promise<Movement[]> {
-  const response = await api.get<Movement[]>('/movements');
+export async function getMovements(
+  page = 0,
+  size = 10
+): Promise<PageResponse<Movement>> {
+  const response = await api.get<PageResponse<Movement>>('/movements', {
+    params: {
+      page,
+      size,
+    },
+  });
 
   return response.data;
 }
@@ -24,10 +32,7 @@ export async function getMovementsByProduct(
 export async function createMovement(
   data: MovementRequest
 ): Promise<Movement> {
-  const response = await api.post<Movement>(
-    '/movements',
-    data
-  );
+  const response = await api.post<Movement>('/movements', data);
 
   return response.data;
 }

@@ -1,9 +1,17 @@
 import { api } from './api';
-
+import type { PageResponse } from '../types/page';
 import type { Product, ProductRequest } from '../types/product';
 
-export async function getProducts(): Promise<Product[]> {
-  const response = await api.get<Product[]>('/products');
+export async function getProducts(
+  page = 0,
+  size = 10
+): Promise<PageResponse<Product>> {
+  const response = await api.get<PageResponse<Product>>('/products', {
+    params: {
+      page,
+      size,
+    },
+  });
 
   return response.data;
 }
@@ -33,4 +41,10 @@ export async function getLowStockProducts(): Promise<Product[]> {
   const response = await api.get<Product[]>('/products/low-stock');
 
   return response.data;
+}
+
+export async function getAllProducts(): Promise<Product[]> {
+  const response = await getProducts(0, 1000);
+
+  return response.content;
 }
