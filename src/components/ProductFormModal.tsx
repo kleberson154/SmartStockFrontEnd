@@ -132,20 +132,21 @@ export function ProductFormModal({ product, onClose, onSaved }: ProductFormModal
               />
             </div>
 
-            <div>
-              <label className="mb-2 block text-sm font-medium text-slate-700">Quantidade</label>
+            {!product && (
+              <div>
+                <label className="mb-2 block text-sm font-medium text-slate-700">Quantidade</label>
 
-              <input
-                name="quantity"
-                type="number"
-                min="0"
-                value={form.quantity}
-                onChange={handleChange}
-                required
-                className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-slate-900"
-              />
-            </div>
-
+                <input
+                  name="quantity"
+                  type="number"
+                  min="0"
+                  value={form.quantity}
+                  onChange={handleChange}
+                  required
+                  className="w-full rounded-lg border border-slate-300 px-4 py-3 outline-none focus:border-slate-900"
+                />
+              </div>
+            )}
             <div>
               <label className="mb-2 block text-sm font-medium text-slate-700">
                 Estoque mínimo
